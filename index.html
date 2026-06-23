@@ -4,87 +4,92 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Texture Challenge - Pen #9 - 2020</title>
+    <title>Wedding Invitation - Lalitha & Srinu</title>
     <script src="https://kit.fontawesome.com/e2ac9cc532.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
   </head>
     
   <body>
   <div class="container">
-  <div class="contents">
-    <div class="one">
-      <h2>Together with their parents</h2>
-      <div class="marquee-container">
-        <div class="marquee-text">
-          <h1>Lalitha</h1>
-          <h1 class="large-font gold-gradient accent-font">&</h1>
-          <h1>Srinu</h1>
+    <div class="bushes-layer blink-animation"></div>
+
+    <div class="contents">
+      <div class="one">
+        <h2>Together with their parents</h2>
+        <div class="marquee-container">
+          <div class="marquee-text">
+            <h1>Lalitha</h1>
+            <h1 class="large-font gold-gradient accent-font">&</h1>
+            <h1>Srinu</h1>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="two">
-      <h2>request the pleasure of your company </h2>
-      <h2>to celebrate their marriage</h2>
-    </div>
-    <div class="three blink-animation">
-      <h1>THURSDAY,</h1>
-      <h1>JULY</h1>
-      <div class="date accent-font">
-        <div class="year-one">
-          <h2>2</h2>
-          <h2>0</h2>
-        </div>
-        <div class="day">
-          <h2>02</h2>
-        </div>
-        <div class="year-two">
-          <h2>2</h2>
-          <h2>6</h2>
-        </div>
+      
+      <div class="two">
+        <h2>request the pleasure of your company </h2>
+        <h2>to celebrate their marriage</h2>
       </div>
-      <h2>at 4 o'clock</h2>
-    </div>
-    <div class="four">
-      <a href="https://maps.app.goo.gl/qNiRYJxchMJtVhmb7" target="_blank" class="location-link blink-animation">
-        <h1>ARASADA </h1>
-        <h1>RAJAM ROAD</h1>
-        <h2>Srikakulam</h2>
-        <h2>Andhra Pradesh, India</h2>
-      </a>
-    </div>
-    <div class="five">
-      <h1>DINNER + DRINKS TO FOLLOW</h1>
-      <h1><i class="fas fa-utensils"></i>&nbsp;&nbsp;+&nbsp;&nbsp;<i class="fas fa-cocktail"></i></h1>
-      <h2 id="rsvp-deadline">Kindly respond by...</h2>
+      
+      <div class="three blink-animation">
+        <h1>THURSDAY,</h1>
+        <h1>JULY</h1>
+        <div class="date accent-font">
+          <div class="year-one">
+            <h2>2</h2>
+            <h2>0</h2>
+          </div>
+          <div class="day">
+            <h2>02</h2>
+          </div>
+          <div class="year-two">
+            <h2>2</h2>
+            <h2>6</h2>
+          </div>
+        </div>
+        <h2>at 4 o'clock</h2>
+      </div>
+      
+      <div class="four">
+        <a href="https://www.google.com/maps?q=Hyderabad" target="_blank" class="location-link blink-animation">
+          <h1>Botanical </h1>
+          <h1>Gardens</h1>
+          <h2>6700 Azalea Garden Rd</h2>
+          <h2>Hyderabad, India</h2>
+        </a>
+      </div>
+      
+      <div class="five">
+        <h1>DINNER + DRINKS TO FOLLOW</h1>
+        <h1><i class="fas fa-utensils"></i>  +  <i class="fas fa-cocktail"></i></h1>
+        <h2 id="rsvp-deadline">Kindly respond by...</h2>
+      </div>
     </div>
   </div>
-</div>
 
-<script>
-  // Target Wedding Date: July 2, 2026
-  const weddingDate = new Date("2026-07-02T16:00:00");
-  
-  function updateCountdownDeadline() {
-    const now = new Date();
-    const timeDiff = weddingDate - now;
-    const rsvpElement = document.getElementById("rsvp-deadline");
+  <script>
+    // Target Wedding Date: July 2, 2026
+    const weddingDate = new Date("2026-07-02T16:00:00");
+    
+    function updateCountdownDeadline() {
+      const now = new Date();
+      const timeDiff = weddingDate - now;
+      const rsvpElement = document.getElementById("rsvp-deadline");
 
-    if (timeDiff <= 0) {
-      rsvpElement.innerText = "The wedding day has arrived!";
-      return;
+      if (timeDiff <= 0) {
+        rsvpElement.innerText = "The wedding day has arrived!";
+        return;
+      }
+
+      const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+      rsvpElement.innerText = `Kindly respond within the next: ${days}d ${hours}h ${minutes}m`;
     }
 
-    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-
-    rsvpElement.innerText = `Kindly respond within the next: ${days}d ${hours}h ${minutes}m`;
-  }
-
-  updateCountdownDeadline();
-  setInterval(updateCountdownDeadline, 60000);
-</script>
+    updateCountdownDeadline();
+    setInterval(updateCountdownDeadline, 60000);
+  </script>
     
   </body>
-  
 </html>
