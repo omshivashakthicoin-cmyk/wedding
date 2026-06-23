@@ -3,6 +3,7 @@
 
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Texture Challenge - Pen #9 - 2020</title>
     <script src="https://kit.fontawesome.com/e2ac9cc532.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
@@ -13,7 +14,6 @@
   <div class="contents">
     <div class="one">
       <h2>Together with their parents</h2>
-      <!-- Wrapped names in a container for the internal scrolling effect -->
       <div class="marquee-container">
         <div class="marquee-text">
           <h1>Lalitha</h1>
@@ -26,7 +26,7 @@
       <h2>request the pleasure of your company </h2>
       <h2>to celebrate their marriage</h2>
     </div>
-    <div class="three">
+    <div class="three blink-animation">
       <h1>THURSDAY,</h1>
       <h1>JULY</h1>
       <div class="date accent-font">
@@ -45,25 +45,22 @@
       <h2>at 4 o'clock</h2>
     </div>
     <div class="four">
-      <!-- Added Google Maps link for Hyderabad and a class for the blinking effect -->
-      <a href="https://maps.app.goo.gl/9Hdnt2eLMbuqMV6k6" target="_blank" class="location-link">
-        <h1>AARSADA </h1>
-        <h1>BALIGUI PETA MANDALAM</h1>
-        <h2>RAJAM LINE</h2>
-        <h2>SRIKAKULAM, Andhra Pradesh, India</h2>
+      <a href="https://www.google.com/maps/place/Hyderabad,+Telangana" target="_blank" class="location-link blink-animation">
+        <h1>Botanical </h1>
+        <h1>Gardens</h1>
+        <h2>6700 Azalea Garden Rd</h2>
+        <h2>Hyderabad, India</h2>
       </a>
     </div>
     <div class="five">
       <h1>DINNER + DRINKS TO FOLLOW</h1>
       <h1><i class="fas fa-utensils"></i>&nbsp;&nbsp;+&nbsp;&nbsp;<i class="fas fa-cocktail"></i></h1>
-      <!-- The deadline will be updated dynamically via JS -->
       <h2 id="rsvp-deadline">Kindly respond by...</h2>
     </div>
   </div>
 </div>
 
 <script>
-  // Wedding Date: July 2, 2026
   const weddingDate = new Date("2026-07-02T00:00:00");
   
   function updateCountdownDeadline() {
@@ -76,16 +73,13 @@
       return;
     }
 
-    // Calculate days, hours, and minutes remaining until the wedding
     const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
 
-    // Update the RSVP text to act as a countdown
     rsvpElement.innerText = `Kindly respond within the next: ${days}d ${hours}h ${minutes}m`;
   }
 
-  // Run immediately and update every minute
   updateCountdownDeadline();
   setInterval(updateCountdownDeadline, 60000);
 </script>
