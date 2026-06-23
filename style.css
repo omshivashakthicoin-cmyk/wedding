@@ -9,7 +9,7 @@
 body {
   background: #534551;
   font-family: "Raleway", sans-serif;
-  zoom: 75%;
+  /* Removed restrictive desktop-only zoom */
 }
 
 h1, h2 {
@@ -150,10 +150,10 @@ h2 {
 }
 
 /* ==========================================================================
-   NEW CUSTOM ANIMATIONS & LINK STYLES
+   ANIMATIONS & RESPONSIVE STYLES
    ========================================================================== */
 
-/* 1. Internal Scrolling Name Marquee */
+/* 1. Internal Name Marquee */
 .marquee-container {
   width: 100%;
   overflow: hidden;
@@ -167,7 +167,6 @@ h2 {
   animation: marquee 12s linear infinite;
 }
 
-/* Make sure the nested block elements act as inline elements for scrolling */
 .marquee-text h1 {
   display: inline-block;
   vertical-align: middle;
@@ -179,19 +178,39 @@ h2 {
   100% { transform: translate3d(-100%, 0, 0); }
 }
 
-/* 2. Blinking Location Link */
+/* 2. Reusable Blinking Class (Used for Date & Location) */
+.blink-animation {
+  animation: blinker 1.5s linear infinite;
+}
+
 .location-link {
   text-decoration: none;
   display: block;
-  animation: blinker 1.5s linear infinite;
   transition: opacity 0.2s ease-in-out;
 }
 
-.location-link:hover {
-  animation: none; /* Stops blinking on hover so it's easier to click */
+/* Stops blinking and lowers opacity slightly on hover/active press */
+.location-link:hover, .location-link:active {
+  animation: none;
   opacity: 0.7;
 }
 
 @keyframes blinker {
   50% { opacity: 0.2; }
+}
+
+/* 3. Mobile View Handling */
+@media screen and (max-width: 890px) {
+  body {
+    padding: 10px;
+  }
+  .container {
+    width: 100%;     /* Scales card width down to fit device screens */
+    height: auto;    /* Lets the card adjust its height dynamically */
+    padding-bottom: 40px;
+  }
+  .contents {
+    width: 85%;      /* Gives text layout breathing room on small screens */
+    padding-top: 150px; /* Reduces massive top padding spacing on phones */
+  }
 }
