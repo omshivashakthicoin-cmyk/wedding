@@ -1,80 +1,184 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Invitation</title>
-    <script src="https://kit.fontawesome.com/e2ac9cc532.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./style.css">
-  </head>
-  <body>
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,500&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display&display=swap");
 
-    <div class="card-container">
-      
-      <div class="section intro-section">
-        <h2>Together with their parents</h2>
-        <div class="marquee-box">
-          <div class="marquee-content">
-            <span class="name">Lalitha</span>
-            <span class="ampersand">&</span>
-            <span class="name">Srinu</span>
-          </div>
-        </div>
-      </div>
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-      <div class="section divider-top">
-        <h2>request the pleasure of your company</h2>
-        <h2>to celebrate their marriage</h2>
-      </div>
+body {
+  background: #534551;
+  font-family: "Raleway", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
 
-      <div class="section divider-top blink-effect">
-        <h1>Thursday, July</h1>
-        <div class="date-display">
-          <div class="year-digit">2<br>0</div>
-          <div class="day-digit">02</div>
-          <div class="year-digit">2<br>6</div>
-        </div>
-        <h2>at 4 o'clock</h2>
-      </div>
+/* Fluid Card Layout */
+.card-container {
+  width: 100%;
+  max-width: 550px; /* Optimal reading width for both desktop and mobile layouts */
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-594540-png.png"), 
+                    url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/paperboard-texture_95678-72.jpg");
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  padding: 40px 30px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  border-radius: 4px;
+}
 
-      <a href="https://www.google.com/maps/search/?api=1&query=Botanical+Gardens+Hyderabad" target="_blank" class="location-card blink-effect">
-        <h1>Botanical Gardens</h1>
-        <h2>6700 Azalea Garden Rd</h2>
-        <h2>Hyderabad, India</h2>
-      </a>
+/* Typography elements scaled down globally to safely fit mobile views */
+h1 {
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  letter-spacing: 3px;
+  color: #4e4b43;
+}
 
-      <div class="section divider-top">
-        <h1>Dinner + Drinks to Follow</h1>
-        <div class="icons">
-          <i class="fas fa-utensils"></i> &nbsp;+&nbsp; <i class="fas fa-cocktail"></i>
-        </div>
-        <h2 id="countdown-timer">Calculating RSVP deadline...</h2>
-      </div>
+h2 {
+  font-weight: 300;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  color: #4e4b43;
+  line-height: 1.6;
+}
 
-    </div>
+/* Section Dividers */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-    <script>
-      const weddingDate = new Date("2026-07-02T16:00:00");
-      
-      function updateCountdown() {
-        const now = new Date();
-        const diff = weddingDate - now;
-        const timerElement = document.getElementById("countdown-timer");
+.divider-top {
+  border-top: 1px solid #cccac4;
+  padding-top: 25px;
+}
 
-        if (diff <= 0) {
-          timerElement.innerText = "The wedding day has arrived!";
-          return;
-        }
+/* Internal Marquee Name Scrolling */
+.marquee-box {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+}
 
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+.marquee-content {
+  display: inline-block;
+  padding-left: 100%;
+  animation: marquee-run 10s linear infinite;
+}
 
-        timerElement.innerText = `Kindly respond within: ${days}d ${hours}h ${minutes}m`;
-      }
+.marquee-content span {
+  display: inline-block;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
 
-      updateCountdown();
-      setInterval(updateCountdown, 60000);
-    </script>
-  </body>
-</html>
+.marquee-content .name {
+  font-size: 1.5rem;
+  letter-spacing: 4px;
+  font-weight: 500;
+  color: #4e4b43;
+}
+
+.marquee-content .ampersand {
+  font-family: "Playfair Display", serif;
+  font-size: 2.5rem;
+  margin: 0 15px;
+  background: -webkit-linear-gradient(#f5d0a9, #c58568);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes marquee-run {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Beautiful Elegant Date Grid */
+.date-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  font-family: "Playfair Display", serif;
+  margin: 5px 0;
+}
+
+.year-digit {
+  font-size: 0.9rem;
+  line-height: 1.2;
+  color: #c58568;
+  font-weight: bold;
+}
+
+.day-digit {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: #c58568;
+}
+
+/* Interactive Location Link Card */
+.location-card {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border-top: 1px solid #cccac4;
+  border-bottom: 1px solid #cccac4;
+  padding: 25px 0;
+  transition: background 0.3s ease;
+}
+
+.location-card h1 {
+  color: #c58568;
+  font-weight: bold;
+}
+
+.location-card:hover, .location-card:active {
+  animation-play-state: paused; /* Pause blinking animations when clicked or hovered */
+  background: rgba(197, 133, 104, 0.08);
+}
+
+/* Icons & Countdown Timer formatting */
+.icons {
+  font-size: 1.6rem;
+  color: #c58568;
+  margin: 5px 0;
+}
+
+#countdown-timer {
+  font-weight: 500;
+  color: #c58568;
+}
+
+/* Global Reusable Blinking Effect */
+.blink-effect {
+  animation: gentle-blink 2s linear infinite;
+}
+
+@keyframes gentle-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Mobile Scale Adjustments */
+@media screen and (max-width: 480px) {
+  .card-container {
+    padding: 30px 15px;
+    gap: 20px;
+  }
+  h1 { font-size: 1.1rem; }
+  h2 { font-size: 0.85rem; }
+  .day-digit { font-size: 2.3rem; }
+}
