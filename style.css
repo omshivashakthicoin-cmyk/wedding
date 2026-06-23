@@ -9,7 +9,6 @@
 body {
   background: #534551;
   font-family: "Raleway", sans-serif;
-  /* Removed restrictive desktop-only zoom */
 }
 
 h1, h2 {
@@ -102,58 +101,41 @@ h2 {
   font-size: 1rem;
 }
 
-/* LAYOUT */
+/* DESKTOP LAYOUT (Default) */
 .container {
   box-sizing: border-box;
   width: 850px;
   height: 1200px;
   margin: 20px auto;
   background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-594540-png.png"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/paperboard-texture_95678-72.jpg");
+  background-size: cover;
+  background-position: center;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
 }
 
 .contents {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 0.2fr 0.5fr 1fr;
-  grid-template-areas: "one one" "two two" "three four" "five five";
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas: 
+    "one one" 
+    "two two" 
+    "three four" 
+    "five five";
   padding-top: 300px;
   text-align: center;
   width: 60%;
   margin: 0 auto;
 }
 
-.one {
-  grid-area: one;
-}
+.one { grid-area: one; }
+.two { grid-area: two; border-top: 2px solid #cccac4; }
+.three { grid-area: three; border-top: 2px solid #cccac4; border-bottom: 2px solid #cccac4; }
+.four { grid-area: four; border-top: 2px solid #cccac4; border-left: 2px solid #cccac4; border-bottom: 2px solid #cccac4; }
+.five { grid-area: five; }
 
-.two {
-  grid-area: two;
-  border-top: 2px solid #cccac4;
-}
 
-.three {
-  grid-area: three;
-  border-top: 2px solid #cccac4;
-  border-bottom: 2px solid #cccac4;
-}
-
-.four {
-  grid-area: four;
-  border-top: 2px solid #cccac4;
-  border-left: 2px solid #cccac4;
-  border-bottom: 2px solid #cccac4;
-}
-
-.five {
-  grid-area: five;
-}
-
-/* ==========================================================================
-   ANIMATIONS & RESPONSIVE STYLES
-   ========================================================================== */
-
-/* 1. Internal Name Marquee */
+/* ANIMATIONS */
 .marquee-container {
   width: 100%;
   overflow: hidden;
@@ -178,7 +160,6 @@ h2 {
   100% { transform: translate3d(-100%, 0, 0); }
 }
 
-/* 2. Reusable Blinking Class (Used for Date & Location) */
 .blink-animation {
   animation: blinker 1.5s linear infinite;
 }
@@ -189,7 +170,6 @@ h2 {
   transition: opacity 0.2s ease-in-out;
 }
 
-/* Stops blinking and lowers opacity slightly on hover/active press */
 .location-link:hover, .location-link:active {
   animation: none;
   opacity: 0.7;
@@ -199,18 +179,48 @@ h2 {
   50% { opacity: 0.2; }
 }
 
-/* 3. Mobile View Handling */
-@media screen and (max-width: 890px) {
-  body {
-    padding: 10px;
-  }
+
+/* ==========================================================================
+   MOBILE & TABLET RESPONSIVE OVERRIDES
+   ========================================================================== */
+@media screen and (max-width: 850px) {
   .container {
-    width: 100%;     /* Scales card width down to fit device screens */
-    height: auto;    /* Lets the card adjust its height dynamically */
-    padding-bottom: 40px;
+    width: 95%;          /* Instead of 850px, adapt to device bounds */
+    height: auto;         /* Allow dynamic expanding */
+    margin: 15px auto;
+    padding-bottom: 50px;
   }
+
   .contents {
-    width: 85%;      /* Gives text layout breathing room on small screens */
-    padding-top: 150px; /* Reduces massive top padding spacing on phones */
+    width: 85%;
+    padding-top: 180px;  /* Bring the content up slightly to offset floral imagery on screens */
+    grid-template-columns: 1fr; /* Force elements to stack one below the other */
+    grid-template-areas: 
+      "one" 
+      "two" 
+      "three" 
+      "four" 
+      "five";
+  }
+
+  /* Reset layout borders for a beautiful stacked vertical appearance */
+  .two {
+    border-top: 2px solid #cccac4;
+    border-bottom: none;
+  }
+
+  .three {
+    border-top: 2px solid #cccac4;
+    border-bottom: none;
+  }
+
+  .four {
+    border-top: 2px solid #cccac4;
+    border-left: none;    /* Strip the desktop side-by-side split border */
+    border-bottom: 2px solid #cccac4; 
+  }
+  
+  .five {
+    border-top: none;
   }
 }
