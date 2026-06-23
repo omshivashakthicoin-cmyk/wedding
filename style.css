@@ -167,11 +167,19 @@ h2 {
   padding-left: 100%;
   animation: marquee 12s linear infinite;
 }
-
 .marquee-text h1 {
   display: inline-block;
   vertical-align: middle;
   margin: 0 10px;
+  color: #ffffff;
+  font-weight: bold; /* This makes the names bold */
+}
+
+/* Keeps the gold gradient styling specifically for the ampersand symbol */
+.marquee-text h1.gold-gradient {
+  background: -webkit-linear-gradient(#f5d0a9, #c58568);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @keyframes marquee {
