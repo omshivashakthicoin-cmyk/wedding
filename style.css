@@ -169,7 +169,7 @@ h2 {
   display: inline-block;
   vertical-align: middle;
   margin: 0 10px;
-  color: #ffffff;    /* Makes the names white */
+   /* Makes the names white */
   font-weight: bold; /* Makes the names bold */
 }
 
