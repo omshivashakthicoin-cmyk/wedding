@@ -102,18 +102,35 @@ h2 {
   font-size: 1rem;
 }
 
-/* LAYOUT */
+/* LAYOUT & STRUCTURAL CARD CONTAINER */
 .container {
+  position: relative; /* Essential to lock the blinking bushes layer inside the boundaries */
   box-sizing: border-box;
   width: 850px;
   height: 1200px;
   margin: 20px auto;
-  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-594540-png.png"), url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/paperboard-texture_95678-72.jpg");
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/paperboard-texture_95678-72.jpg");
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
-  transform-origin: top center; /* Needed for mobile zoom scale scaling */
+  transform-origin: top center;
+}
+
+/* Independent Blinking Bushes Layer */
+.bushes-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/38816/image-from-rawpixel-id-594540-png.png");
+  background-size: cover;
+  background-position: center;
+  pointer-events: none; /* Allows user to click link layers sitting underneath */
+  z-index: 1;
 }
 
 .contents {
+  position: relative;
+  z-index: 2; /* Positions text cleanly over the blinking background image */
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 0.2fr 0.5fr 1fr;
@@ -124,37 +141,17 @@ h2 {
   margin: 0 auto;
 }
 
-.one {
-  grid-area: one;
-}
-
-.two {
-  grid-area: two;
-  border-top: 2px solid #cccac4;
-}
-
-.three {
-  grid-area: three;
-  border-top: 2px solid #cccac4;
-  border-bottom: 2px solid #cccac4;
-}
-
-.four {
-  grid-area: four;
-  border-top: 2px solid #cccac4;
-  border-left: 2px solid #cccac4;
-  border-bottom: 2px solid #cccac4;
-}
-
-.five {
-  grid-area: five;
-}
+.one { grid-area: one; }
+.two { grid-area: two; border-top: 2px solid #cccac4; }
+.three { grid-area: three; border-top: 2px solid #cccac4; border-bottom: 2px solid #cccac4; }
+.four { grid-area: four; border-top: 2px solid #cccac4; border-left: 2px solid #cccac4; border-bottom: 2px solid #cccac4; }
+.five { grid-area: five; }
 
 /* ==========================================================================
-   UPDATED FUNCTIONS: MARQUEE, BLINK, AND SMART MOBILE VIEW
+   ANIMATIONS, TYPOGRAPHY OVERRIDES, & MOBILE VIEWPORTS
    ========================================================================== */
 
-/* 1. Couple Name Internal Scrolling Marquee */
+/* 1. Couple Name Internal Marquee - Bold & White */
 .marquee-container {
   width: 100%;
   overflow: hidden;
@@ -167,15 +164,16 @@ h2 {
   padding-left: 100%;
   animation: marquee 12s linear infinite;
 }
+
 .marquee-text h1 {
   display: inline-block;
   vertical-align: middle;
   margin: 0 10px;
-  
-  font-weight: bold; /* This makes the names bold */
+  color: #ffffff;    /* Makes the names white */
+  font-weight: bold; /* Makes the names bold */
 }
 
-/* Keeps the gold gradient styling specifically for the ampersand symbol */
+/* Safeguards gradient style rule exclusively for the separator ampersand */
 .marquee-text h1.gold-gradient {
   background: -webkit-linear-gradient(#f5d0a9, #c58568);
   -webkit-background-clip: text;
@@ -187,7 +185,7 @@ h2 {
   100% { transform: translate3d(-100%, 0, 0); }
 }
 
-/* 2. Blinking Features (Location & Date) */
+/* 2. Reusable Blinking Effect (Bushes, Date & Location Link) */
 .blink-animation {
   animation: blinker 1.5s linear infinite;
 }
@@ -207,15 +205,14 @@ h2 {
   50% { opacity: 0.2; }
 }
 
-/* 3. Smart Zoom to make the full 850px original card completely visible on mobile */
+/* 3. Mobile View Scaling Configuration */
 @media screen and (max-width: 850px) {
   body {
-    zoom: 100%; /* Overrides the base 75% zoom on smaller device monitors */
+    zoom: 100%;
     padding: 10px;
     overflow-x: hidden;
   }
   .container {
-    /* Automatically scales down the exact card size dynamically to fit your precise screen width */
     transform: scale(calc(window.innerWidth / 890)); 
     margin: 10px auto;
   }
